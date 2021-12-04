@@ -11,7 +11,7 @@ for i in fs.readlines():
 
 # allDataInOneList contains each work separately
 # now its time to manipulate the data with regex
-print(allDataInOneList)
+# print(allDataInOneList)
 
 listOfListWithEachEntry = []
 dateRepetitionTracker = 0
@@ -24,10 +24,50 @@ for i in allDataInOneList:
 
 
     #11111111111111111111111111111111111111111111111111111111111111111111111111111111
+
+# Adding dates here with regex ----------------------------------------------------
+    pattern1 = re.compile("\d\d-\w\w\w-\d\d")  # 33-Mar-43
+    pattern2 = re.compile("\d-\w\w\w-\d\d")  # 5-Jul-34
+    pattern3 = re.compile("\d-\w\w\w\d")  # 6-Mar6
+    pattern4 = re.compile("\d-\w\w\w-\d")  # 4-mar-3
+
+    if pattern1.match(i) or pattern2.match(i) or pattern3.match(i) or pattern4.match(i):
+        dateRepetitionTracker = dateRepetitionTracker + 1 #tracker
+        listOfListWithEachEntry[EntryRepetitionTracker].append(i) #adding to list
+    # End of adding date with regex-----------------------------------------------------
+
     #111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-    #2222222222222222222222222222222222222222222222222222222222222222222222222222222222
-    #222222222222222222222222222222222222222222222222222222222222222222222222222222222222
-    #3333333333333333333333333333333333333333333333333333333333333333333333333333333
+    #2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3
+
+
+    jointMistakePattern1 = re.compile("\d\d\d\d\d\d\d\d\d\d")  # 3942270482
+    if jointMistakePattern1.match(i):
+        listOfListWithEachEntry[EntryRepetitionTracker].append(i[0:4])
+        listOfListWithEachEntry[EntryRepetitionTracker].append(i[4:-1])
+
+    else:
+
+        # 2. number 4 digit ( 2324 ) --------------------------------------------------------
+        numPattern1 = re.compile("\d\d\d\d")  # 1234
+        # numPattern2 = re.compile("\d\d\d") # 123
+
+        if numPattern1.match(i) and (len(i) == 3 or len(i) == 4):
+            listOfListWithEachEntry[EntryRepetitionTracker].append(i)
+
+        # End of number 4 digits adding ....................................................
+
+        # 3. Adding number 6 digit (343423)
+        sixPattern1 = re.compile("\d\d\d\d\d\d")  # 123445
+        # sixPattern2 = re.compile("\d\d\d\d\d") # 12344
+
+        if sixPattern1.match(i) and (len(i) == 5 or len(i) == 6):
+            listOfListWithEachEntry[EntryRepetitionTracker].append(i)
+
+    # End of number 6 digit (343423) -----------------------------------------------------
+
+    #2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3
+
+
     #3333333333333333333333333333333333333333333333333333333333333333333333333333333333
     #4444444444444444444444444444444444444444444444444444444444444444444444444444444444
     #4444444444444444444444444444444444444444444444444444444444444444444444444444444444
@@ -64,40 +104,8 @@ for i in allDataInOneList:
 
 
 
-    # Adding dates here with regex ----------------------------------------------------
-    pattern1 = re.compile("\d\d-\w\w\w-\d\d")  # 33-Mar-43
-    pattern2 = re.compile("\d-\w\w\w-\d\d")  # 5-Jul-34
-    pattern3 = re.compile("\d-\w\w\w\d")  # 6-Mar6
-    pattern4 = re.compile("\d-\w\w\w-\d")  # 4-mar-3
+    
 
-    if pattern1.match(i) or pattern2.match(i) or pattern3.match(i) or pattern4.match(i):
-        dateRepetitionTracker = dateRepetitionTracker + 1
-        listOfListWithEachEntry[EntryRepetitionTracker].append(i)
-    # End of adding date with regex-----------------------------------------------------
-
-    jointMistakePattern1 = re.compile("/d/d/d/d/d/d/d/d/d/d")  # 3942270482
-    if jointMistakePattern1.match(i):
-        listOfListWithEachEntry[EntryRepetitionTracker].append(i)
-        print('333333333333333333333333333333333333333333333333333333333333333333')
-    else:
-
-        # 2. number 4 digit ( 2324 ) --------------------------------------------------------
-        numPattern1 = re.compile("\d\d\d\d")  # 1234
-        # numPattern2 = re.compile("\d\d\d") # 123
-
-        if numPattern1.match(i) and (len(i) == 3 or len(i) == 4):
-            listOfListWithEachEntry[EntryRepetitionTracker].append(i)
-
-        # End of number 4 digits adding ....................................................
-
-        # 3. Adding number 6 digit (343423)
-        sixPattern1 = re.compile("\d\d\d\d\d\d")  # 123445
-        # sixPattern2 = re.compile("\d\d\d\d\d") # 12344
-
-        if sixPattern1.match(i) and (len(i) == 5 or len(i) == 6):
-            listOfListWithEachEntry[EntryRepetitionTracker].append(i)
-
-    # End of number 6 digit (343423) -----------------------------------------------------
     # Resetting the repetition date data & incrementing field list
     if dateRepetitionTracker == 3:
         dateRepetitionTracker = 0
