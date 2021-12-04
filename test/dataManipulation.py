@@ -16,8 +16,12 @@ for i in fs.readlines():
 listOfListWithEachEntry = []
 dateRepetitionTracker = 0
 EntryRepetitionTracker = 0
+name  = '' #to track name of a person
+phoneConflictWithCodeTracker = 0 # Track that if code joints and make 10 digits number then it won't be conflict by phone numbers
 
-for i in allDataInOneList:
+for index,i in enumerate(allDataInOneList):
+    if len(allDataInOneList) -1 == index:
+        continue
     # Right Code : it will add a new list or entry
     if dateRepetitionTracker == 0:
         listOfListWithEachEntry.append([])
@@ -34,6 +38,7 @@ for i in allDataInOneList:
     if pattern1.match(i) or pattern2.match(i) or pattern3.match(i) or pattern4.match(i):
         dateRepetitionTracker = dateRepetitionTracker + 1 #tracker
         listOfListWithEachEntry[EntryRepetitionTracker].append(i) #adding to list
+        continue
     # End of adding date with regex-----------------------------------------------------
 
     #111111111111111111111111111111111111111111111111111111111111111111111111111111111111
@@ -42,8 +47,15 @@ for i in allDataInOneList:
 
     jointMistakePattern1 = re.compile("\d\d\d\d\d\d\d\d\d\d")  # 3942270482
     if jointMistakePattern1.match(i):
-        listOfListWithEachEntry[EntryRepetitionTracker].append(i[0:4])
-        listOfListWithEachEntry[EntryRepetitionTracker].append(i[4:-1])
+        if phoneConflictWithCodeTracker == 0 :
+
+            listOfListWithEachEntry[EntryRepetitionTracker].append(i[0:4])
+            listOfListWithEachEntry[EntryRepetitionTracker].append(i[4:-1])
+        phoneConflictWithCodeTracker = phoneConflictWithCodeTracker + 1
+        if phoneConflictWithCodeTracker == 3:
+            phoneConflictWithCodeTracker = 0
+
+        continue
 
     else:
 
@@ -53,6 +65,8 @@ for i in allDataInOneList:
 
         if numPattern1.match(i) and (len(i) == 3 or len(i) == 4):
             listOfListWithEachEntry[EntryRepetitionTracker].append(i)
+            phoneConflictWithCodeTracker = phoneConflictWithCodeTracker + 0.5
+            continue
 
         # End of number 4 digits adding ....................................................
 
@@ -62,14 +76,33 @@ for i in allDataInOneList:
 
         if sixPattern1.match(i) and (len(i) == 5 or len(i) == 6):
             listOfListWithEachEntry[EntryRepetitionTracker].append(i)
+            phoneConflictWithCodeTracker = phoneConflictWithCodeTracker + 0.5
+            continue
 
     # End of number 6 digit (343423) -----------------------------------------------------
 
     #2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3 2 3
 
-
-    #3333333333333333333333333333333333333333333333333333333333333333333333333333333333
     #4444444444444444444444444444444444444444444444444444444444444444444444444444444444
+
+    namePattern = re.compile("[a-zA-Z]")  # anyname
+    previousElement = allDataInOneList[index -1]
+    nextElement = allDataInOneList[index +1]
+    if namePattern.match(i) and sixPattern1.match(previousElement):
+        name =  i
+        
+    
+    elif (namePattern.match(i)) and (pattern1.match(nextElement) or pattern2.match(nextElement) or pattern3.match(nextElement) or pattern4.match(nextElement)):
+        name = name + ' ' + i 
+        listOfListWithEachEntry[EntryRepetitionTracker].append(name)
+        
+        name = ''
+       
+        continue
+    else:
+        
+        name = name + ' ' + i 
+
     #4444444444444444444444444444444444444444444444444444444444444444444444444444444444
     #5555555555555555555555555555555555555555555555555555555555555555555555555555555555555
     #55555555555555555555555555555555555555555555555555555555555555555555555555555555555
