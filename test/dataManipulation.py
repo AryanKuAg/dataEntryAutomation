@@ -18,6 +18,7 @@ dateRepetitionTracker = 0
 EntryRepetitionTracker = 0
 name  = '' #to track name of a person
 phoneConflictWithCodeTracker = 0 # Track that if code joints and make 10 digits number then it won't be conflict by phone numbers
+splittedEmailTracker = '' # To Track Splitted Email
 
 for index,i in enumerate(allDataInOneList):
     if len(allDataInOneList) -1 == index:
@@ -105,12 +106,35 @@ for index,i in enumerate(allDataInOneList):
 
     #4444444444444444444444444444444444444444444444444444444444444444444444444444444444
     #5555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+
+    #SO ITS A DATE THAT WILL FILLED UP BY SECTION 1 
+
     #55555555555555555555555555555555555555555555555555555555555555555555555555555555555
     #66666666666666666666666666666666666666666666666666666666666666666666666666666666666
+
+    if ("OPEN" in i) or ("open" in i):
+        listOfListWithEachEntry[EntryRepetitionTracker].append("OPEN")
+    elif ("CLOSED" in i) or ("closed" in i):       
+        listOfListWithEachEntry[EntryRepetitionTracker].append("CLOSED")
+
     #66666666666666666666666666666666666666666666666666666666666666666666666666666666666
     #77777777777777777777777777777777777777777777777777777777777777777777777777777777777
+
+    if (previousElement == "OPEN") or (previousElement == "CLOSED") or not (splittedEmailTracker == ''):
+        if not (splittedEmailTracker == '') and '@' in i:
+            splittedEmailTracker = splittedEmailTracker + i
+            listOfListWithEachEntry[EntryRepetitionTracker].append(i)
+            splittedEmailTracker = ''
+        elif namePattern.match(i) and '@' in nextElement:
+            splittedEmailTracker = i    
+        elif namePattern.match(i) and '@' in i:
+            listOfListWithEachEntry[EntryRepetitionTracker].append(i)
+        
     #777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     #888888888888888888888888888888888888888888888888888888888888888888888888888888888
+
+
+    
     #8888888888888888888888888888888888888888888888888888888888888888888888888888888888
     #99999999999999999999999999999999999999999999999999999999999999999999999999999999999
     #99999999999999999999999999999999999999999999999999999999999999999999999999999999999
