@@ -19,6 +19,7 @@ EntryRepetitionTracker = 0
 name  = '' #to track name of a person
 phoneConflictWithCodeTracker = 0 # Track that if code joints and make 10 digits number then it won't be conflict by phone numbers
 splittedEmailTracker = '' # To Track Splitted Email
+annualSalaryTracker = '' # To keep track of annual salary
 
 for index,i in enumerate(allDataInOneList):
     if len(allDataInOneList) -1 == index: # This protect me from list out of bound error
@@ -169,9 +170,22 @@ for index,i in enumerate(allDataInOneList):
         listOfListWithEachEntry[EntryRepetitionTracker].append(i)
 
 
-
     #11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11
     #12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12
+# ('ly' in i or ',' in i or 'nnua' in i)
+
+    salaryPattern = re.compile("[0-9]")
+
+    if salaryPattern.match(i) and (',' in i ) and not '-' in i :
+        # listOfListWithEachEntry[EntryRepetitionTracker].append(i)
+        annualSalaryTracker = i 
+        continue
+    elif not annualSalaryTracker == '' and ('ly' in i or 'nnua' in i or 'ann' in i):
+        annualSalaryTracker = annualSalaryTracker + ' ' + i
+        listOfListWithEachEntry[EntryRepetitionTracker].append(annualSalaryTracker)
+        annualSalaryTracker = ''
+        continue
+
     #12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12
     #13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13
     #13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13
@@ -181,16 +195,6 @@ for index,i in enumerate(allDataInOneList):
     #15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15
 
 
-
-
-
-
-
-
-
-
-
-    
 
     # Resetting the repetition date data & incrementing field list
     if dateRepetitionTracker == 3 and pattern1.match(nextElement) or pattern2.match(nextElement) or pattern3.match(nextElement) or pattern4.match(nextElement):
