@@ -1,4 +1,8 @@
-import re
+import dataManipulation
+
+
+for i in range(1, 1000):
+    arranged = dataManipulation('extraction' + i + '.txt')
 
 # the = "The police loves nothing but police"
 # x = re.search("police", the)

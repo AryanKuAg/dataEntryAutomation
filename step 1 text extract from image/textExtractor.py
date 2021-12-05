@@ -6,6 +6,8 @@ try:
     for i in range(1, 100):
   # Defining paths to tesseract.exe
   # and the image we would be using
+
+  # set the path of tesseract
       path_to_tesseract = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
       image_path = "da"+ str(i)+".jpeg"
   
