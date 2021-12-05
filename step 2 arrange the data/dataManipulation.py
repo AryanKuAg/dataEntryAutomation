@@ -47,7 +47,7 @@ for index,i in enumerate(allDataInOneList):
     if pattern1.match(i) or pattern2.match(i) or pattern3.match(i) or pattern4.match(i):
         dateRepetitionTracker = dateRepetitionTracker + 1 #tracker
         listOfListWithEachEntry[EntryRepetitionTracker].append(i) #adding to list
-        continue
+        
     # End of adding date with regex-----------------------------------------------------
 
     #111111111111111111111111111111111111111111111111111111111111111111111111111111111111
@@ -67,7 +67,7 @@ for index,i in enumerate(allDataInOneList):
         if phoneConflictWithCodeTracker == 3:
             phoneConflictWithCodeTracker = 0
 
-        continue
+        
 
     else:
 
@@ -78,7 +78,7 @@ for index,i in enumerate(allDataInOneList):
         if numPattern1.match(i) and (len(i) == 3 or len(i) == 4):
             listOfListWithEachEntry[EntryRepetitionTracker].append(i)
             phoneConflictWithCodeTracker = phoneConflictWithCodeTracker + 0.5
-            continue
+           
 
         # End of number 4 digits adding ....................................................
 
@@ -89,7 +89,7 @@ for index,i in enumerate(allDataInOneList):
         if sixPattern1.match(i) and (len(i) == 5 or len(i) == 6):
             listOfListWithEachEntry[EntryRepetitionTracker].append(i)
             phoneConflictWithCodeTracker = phoneConflictWithCodeTracker + 0.5
-            continue
+            
 
     # End of number 6 digit (343423) -----------------------------------------------------
 
@@ -109,7 +109,7 @@ for index,i in enumerate(allDataInOneList):
         
         name = ''
        
-        continue
+       
     else:
         
         name = name + ' ' + i 
@@ -124,10 +124,10 @@ for index,i in enumerate(allDataInOneList):
 
     if ("OPEN" in i) or ("open" in i):
         listOfListWithEachEntry[EntryRepetitionTracker].append("OPEN")
-        continue
+       
     elif ("CLOSED" in i) or ("closed" in i):       
         listOfListWithEachEntry[EntryRepetitionTracker].append("CLOSED")
-        continue
+        
 
     #66666666666666666666666666666666666666666666666666666666666666666666666666666666666
     #77777777777777777777777777777777777777777777777777777777777777777777777777777777777
@@ -137,13 +137,13 @@ for index,i in enumerate(allDataInOneList):
             splittedEmailTracker = splittedEmailTracker + i
             listOfListWithEachEntry[EntryRepetitionTracker].append(i)
             splittedEmailTracker = ''
-            continue
+            
         elif namePattern.match(i) and '@' in nextElement:
             splittedEmailTracker = i
-            continue    
+              
         elif namePattern.match(i) and '@' in i:
             listOfListWithEachEntry[EntryRepetitionTracker].append(i)
-            continue
+            
         
     #777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     #888888888888888888888888888888888888888888888888888888888888888888888888888888888
@@ -179,12 +179,15 @@ for index,i in enumerate(allDataInOneList):
     if salaryPattern.match(i) and (',' in i ) and not '-' in i :
         # listOfListWithEachEntry[EntryRepetitionTracker].append(i)
         annualSalaryTracker = i 
-        continue
+        
     elif not annualSalaryTracker == '' and ('ly' in i or 'nnua' in i or 'ann' in i):
         annualSalaryTracker = annualSalaryTracker + ' ' + i
         listOfListWithEachEntry[EntryRepetitionTracker].append(annualSalaryTracker)
         annualSalaryTracker = ''
-        continue
+        
+
+
+
 
     #12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12
     #13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13

@@ -1,8 +1,8 @@
 import re
 
-the = "The police loves nothing but police"
-x = re.search("police", the)
-print(x)
+# the = "The police loves nothing but police"
+# x = re.search("police", the)
+# print(x)
 # fs = open("extraction1.txt", "r")
 
 # def giveList(text):
