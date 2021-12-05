@@ -117,8 +117,10 @@ for index,i in enumerate(allDataInOneList):
 
     if ("OPEN" in i) or ("open" in i):
         listOfListWithEachEntry[EntryRepetitionTracker].append("OPEN")
+        continue
     elif ("CLOSED" in i) or ("closed" in i):       
         listOfListWithEachEntry[EntryRepetitionTracker].append("CLOSED")
+        continue
 
     #66666666666666666666666666666666666666666666666666666666666666666666666666666666666
     #77777777777777777777777777777777777777777777777777777777777777777777777777777777777
@@ -128,10 +130,13 @@ for index,i in enumerate(allDataInOneList):
             splittedEmailTracker = splittedEmailTracker + i
             listOfListWithEachEntry[EntryRepetitionTracker].append(i)
             splittedEmailTracker = ''
+            continue
         elif namePattern.match(i) and '@' in nextElement:
-            splittedEmailTracker = i    
+            splittedEmailTracker = i
+            continue    
         elif namePattern.match(i) and '@' in i:
             listOfListWithEachEntry[EntryRepetitionTracker].append(i)
+            continue
         
     #777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     #888888888888888888888888888888888888888888888888888888888888888888888888888888888
@@ -152,10 +157,13 @@ for index,i in enumerate(allDataInOneList):
     #101010101010101010101010101010101010101010101010101010101010101010101010101010101010
     #11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11
 
+    capitalCodePattern = re.compile("[A-Z]") # ABX, NO
+
+    if capitalCodePattern.match(i):
+        listOfListWithEachEntry[EntryRepetitionTracker].append(i)
 
 
 
-    
     #11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11
     #12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12
     #12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12
