@@ -21,12 +21,9 @@ phoneConflictWithCodeTracker = 0 # Track that if code joints and make 10 digits 
 splittedEmailTracker = '' # To Track Splitted Email
 
 for index,i in enumerate(allDataInOneList):
-    if len(allDataInOneList) -1 == index:
+    if len(allDataInOneList) -1 == index: # This protect me from list out of bound error
         continue
-    # Right Code : it will add a new list or entry
-    if dateRepetitionTracker == 0:
-        listOfListWithEachEntry.append([])
-
+    
 
     #11111111111111111111111111111111111111111111111111111111111111111111111111111111
 
@@ -35,6 +32,16 @@ for index,i in enumerate(allDataInOneList):
     pattern2 = re.compile("\d-\w\w\w-\d\d")  # 5-Jul-34
     pattern3 = re.compile("\d-\w\w\w\d")  # 6-Mar6
     pattern4 = re.compile("\d-\w\w\w-\d")  # 4-mar-3
+
+    previousElement = allDataInOneList[index -1]
+    nextElement = allDataInOneList[index +1]
+
+    # Right Code : it will add a new list or entry
+    if (dateRepetitionTracker == 0) :
+        
+        listOfListWithEachEntry.append([])
+        
+
 
     if pattern1.match(i) or pattern2.match(i) or pattern3.match(i) or pattern4.match(i):
         dateRepetitionTracker = dateRepetitionTracker + 1 #tracker
@@ -90,8 +97,7 @@ for index,i in enumerate(allDataInOneList):
     #4444444444444444444444444444444444444444444444444444444444444444444444444444444444
 
     namePattern = re.compile("[a-zA-Z]")  # anyname
-    previousElement = allDataInOneList[index -1]
-    nextElement = allDataInOneList[index +1]
+    
     if namePattern.match(i) and sixPattern1.match(previousElement):
         name =  i
         
@@ -187,9 +193,10 @@ for index,i in enumerate(allDataInOneList):
     
 
     # Resetting the repetition date data & incrementing field list
-    if dateRepetitionTracker == 3:
+    if dateRepetitionTracker == 3 and pattern1.match(nextElement) or pattern2.match(nextElement) or pattern3.match(nextElement) or pattern4.match(nextElement):
         dateRepetitionTracker = 0
         EntryRepetitionTracker = EntryRepetitionTracker + 1
+        
 
 print('listoflistwitheachentry : ', listOfListWithEachEntry)
 print('daterepetitiontracker', dateRepetitionTracker)
